@@ -28,11 +28,11 @@ class Auth extends CI_Controller
        
     }
 
+
     private function _login() 
     {
         $email = $this->input->post('email');
         $password = $this->input->post('password');
-
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
      
         // jika usernya ada
@@ -44,7 +44,6 @@ class Auth extends CI_Controller
                 // cek password
                 if(password_verify($password, $user['password'])) 
                 {
-
                     $data = [
                         'email' => $user['email'],
                         'role_id' => $user['role_id']
@@ -55,9 +54,6 @@ class Auth extends CI_Controller
                     } else {
                         redirect('user');
                     }
-
-                    
-
 
                 } else {
 
@@ -115,14 +111,14 @@ class Auth extends CI_Controller
 
             $this->db->insert('user', $data);
             $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
-  Congratulation your account has been registered! Pleas Login
-</div>');
-            redirect('auth');
+                    Congratulation your account has been registered! Pleas Login</div>');
+                    redirect('auth');
             
     	}
 
 
     }
+
 
     public function logout() {
 
@@ -130,8 +126,8 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('role-id');
 
         $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
-  You has been logged out</div>');
-           redirect('auth');
+                You has been logged out</div>');
+                redirect('auth');
       
 
          // echo "logout berhasil";
